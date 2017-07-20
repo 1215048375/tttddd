@@ -11,5 +11,14 @@ namespace backend\models;
 
 class Dollar
 {
+    public $amount;
+    public function __construct($num)
+    {
+        $this->amount = $num;
+    }
 
+    public function times($times)
+    {
+        $this->amount *= $times;
+    }
 }

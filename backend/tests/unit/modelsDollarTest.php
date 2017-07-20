@@ -23,7 +23,7 @@ class modelsDollarTest extends \Codeception\Test\Unit
     public function testMe()
     {
         $dollorFive = new Dollar(5);
-        $dollorFive.times(2);
+        $dollorFive->times(2);
         $this->assertEquals(10, $dollorFive->amount);
     }
 }
