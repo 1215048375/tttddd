@@ -21,4 +21,9 @@ class Dollar
     {
         $this->amount *= $times;
     }
+
+    public function equals(Dollar $dollar)
+    {
+        return $dollar->amount === $this->amount;
+    }
 }

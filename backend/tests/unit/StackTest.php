@@ -7,7 +7,7 @@
  */
 class StackTest extends PHPUnit_Framework_TestCase
 {
-    public function testOne2One()
+    public function testArrayCount()
     {
         $array = [];
         $this->assertEquals(0, count($array));

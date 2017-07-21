@@ -33,4 +33,5 @@ class LoginCest
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Signup');
     }
+
 }
