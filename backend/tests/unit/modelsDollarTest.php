@@ -2,6 +2,7 @@
 namespace backend\tests;
 
 use backend\models\Dollar;
+use backend\models\Franc;
 
 
 class modelsDollarTest extends \Codeception\Test\Unit
@@ -22,17 +23,25 @@ class modelsDollarTest extends \Codeception\Test\Unit
     // tests
     public function testTimes()
     {
-        $dollorFive = new Dollar(5);
-        $dollorFive->times(2);
-        $this->assertEquals(10, $dollorFive->amount);
-        $dollorFive->times(3);
-        $this->assertEquals(30, $dollorFive->amount);
+        $dollarFive = new Dollar(5);
+        $this->assertEquals(new Dollar(10), $dollarFive->times(2));
+        $this->assertEquals(new Dollar(15), $dollarFive->times(3));
+        $this->assertNotEquals(new Dollar(16), $dollarFive->times(4));
+
+        $francFive = new Franc(5);
+        $this->assertEquals(new Franc(10), $francFive->times(2));
+        $this->assertEquals(new Franc(15), $francFive->times(3));
     }
 
     public function testEquals() {
-        $dollorFive = new Dollar(5);
-        $this->assertTrue($dollorFive->equals(new Dollar(5)));
-        $this->assertFalse($dollorFive->equals(new Dollar(6)));
+        $dollarFive = new Dollar(5);
+        $this->assertTrue($dollarFive->equals(new Dollar(5)));
+        $this->assertFalse($dollarFive->equals(new Dollar(6)));
 
+        $francFive = new Franc(5);
+        $this->assertTrue($francFive->equals(new Franc(5)));
+        $this->assertFalse($francFive->equals(new Franc(6)));
+
+        $this->assertFalse($francFive->equals($dollarFive));
     }
 }

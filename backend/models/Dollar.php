@@ -9,21 +9,6 @@
 namespace backend\models;
 
 
-class Dollar
+class Dollar extends Money
 {
-    public $amount;
-    public function __construct($num)
-    {
-        $this->amount = $num;
-    }
-
-    public function times($times)
-    {
-        $this->amount *= $times;
-    }
-
-    public function equals(Dollar $dollar)
-    {
-        return $dollar->amount === $this->amount;
-    }
 }
