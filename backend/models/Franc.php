@@ -11,4 +11,5 @@ namespace backend\models;
 
 class Franc extends Money
 {
+    protected static $currency = 'CHF';
 }

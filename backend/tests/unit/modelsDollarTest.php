@@ -3,6 +3,7 @@ namespace backend\tests;
 
 use backend\models\Dollar;
 use backend\models\Franc;
+use backend\models\Money;
 
 
 class modelsDollarTest extends \Codeception\Test\Unit
@@ -23,25 +24,28 @@ class modelsDollarTest extends \Codeception\Test\Unit
     // tests
     public function testTimes()
     {
-        $dollarFive = new Dollar(5);
-        $this->assertEquals(new Dollar(10), $dollarFive->times(2));
-        $this->assertEquals(new Dollar(15), $dollarFive->times(3));
-        $this->assertNotEquals(new Dollar(16), $dollarFive->times(4));
+        $dollarFive = Money::dollar(5);
+        $this->assertEquals(Money::dollar(10), $dollarFive->times(2));
+        $this->assertEquals(Money::dollar(15), $dollarFive->times(3));
 
-        $francFive = new Franc(5);
-        $this->assertEquals(new Franc(10), $francFive->times(2));
-        $this->assertEquals(new Franc(15), $francFive->times(3));
+        $francFive = Money::franc(6);
+        $this->assertEquals(Money::franc(12), $francFive->times(2));
+        $this->assertEquals(Money::franc(18), $francFive->times(3));
     }
 
     public function testEquals() {
-        $dollarFive = new Dollar(5);
-        $this->assertTrue($dollarFive->equals(new Dollar(5)));
-        $this->assertFalse($dollarFive->equals(new Dollar(6)));
+        $this->assertTrue(Money::dollar(5)->equals(Money::dollar(5)));
+        $this->assertFalse(Money::dollar(5)->equals(Money::dollar(6)));
 
-        $francFive = new Franc(5);
-        $this->assertTrue($francFive->equals(new Franc(5)));
-        $this->assertFalse($francFive->equals(new Franc(6)));
+        $this->assertTrue(Money::franc(5)->equals(Money::franc(5)));
+        $this->assertFalse(Money::franc(5)->equals(Money::franc(6)));
 
-        $this->assertFalse($francFive->equals($dollarFive));
+        $this->assertFalse(Money::dollar(5)->equals(Money::franc(5)));
+    }
+
+    public function testCurrency()
+    {
+        $this->assertEquals('USD', Money::dollar(1)->currency());
+        $this->assertEquals('CHF', Money::franc(1)->currency());
     }
 }

@@ -11,4 +11,5 @@ namespace backend\models;
 
 class Dollar extends Money
 {
+    protected static $currency = 'USD';
 }

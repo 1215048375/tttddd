@@ -9,9 +9,25 @@
 namespace backend\models;
 
 
-class Money
+abstract class Money
 {
     private $amount;
+    protected static $currency;
+
+    public function currency()
+    {
+        return static::$currency;
+    }
+
+    public static function dollar($num)
+    {
+        return new Dollar($num);
+    }
+
+    public static function franc($num)
+    {
+        return new Franc($num);
+    }
 
     public function __construct($num)
     {
@@ -25,6 +41,7 @@ class Money
 
     public function equals($money)
     {
-        return $money->amount === $this->amount;
+        return $money->amount === $this->amount &&
+            get_called_class() === get_class($money);
     }
 }
